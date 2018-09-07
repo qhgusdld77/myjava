@@ -1,0 +1,37 @@
+/*
+	==== TCP 통신방식을 이용한 예제 ====
+	- 서버단          : ServerSocket 과 Socket 이 필요함.
+	- 클라이언트단 : Socket 이 필요함.
+
+*/
+
+package net.day1;
+
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class MyNetClient2 {
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print(">> 연결할 서버의 IP 주소 입력 => ");
+		
+		String serverIP = sc.next();
+
+		Socket sock = new Socket(serverIP, 1000);
+		
+		System.out.println(">>> "+serverIP+"서버와 연결됨 <<<\n");
+		
+		OutputStream ostrm = sock.getOutputStream();
+		DataOutputStream doutstrm = new DataOutputStream(ostrm);
+	
+		
+
+
+
+	}//end of main-------------------------------------------
+
+}

@@ -1,0 +1,23 @@
+package io.day1;
+
+import java.io.IOException;
+
+public class InputStreamTest3 {
+
+	public static void main(String[] args) throws IOException {
+		 int input = 0;
+		 int totalByte = 0;
+		 
+		 while((input = System.in.read()) != -1) {
+			 
+			 System.out.write(input);
+			 totalByte++;
+					
+		}
+
+		 System.out.println("입력받은 byte 수 : " +totalByte+"byte");
+		 
+
+	}//end of main--------------
+
+}

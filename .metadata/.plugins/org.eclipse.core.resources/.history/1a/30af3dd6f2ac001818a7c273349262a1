@@ -1,0 +1,26 @@
+/*
+	==== 파일복사하기 ====
+	C:\iotestdata\korea.txt 을 읽어다가 
+	C:\iotestdata\koteacopy.txt 파일을 생성하시오.
+	
+	1byte 씩
+*/
+
+package io.day1;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+public class FileCopy1 {
+
+	public static void main(String[] args) {
+
+		String filename = "C:\\iotestdata\\korea.txt";
+		
+		FileInputStream fist = new FileInputStream(filename);
+		
+
+	}
+
+}

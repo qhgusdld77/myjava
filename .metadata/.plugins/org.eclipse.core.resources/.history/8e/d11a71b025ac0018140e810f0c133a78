@@ -1,0 +1,19 @@
+package my.day19.sub4;
+
+public class UpmoneyRunnable implements Runnable {
+
+	private NoSyncBankbook bankbook;
+	private long upmoney;
+	
+	
+	@Override
+	public void run() {
+		
+		
+	}//end of run()---------------------------
+	
+	
+	
+	
+
+}

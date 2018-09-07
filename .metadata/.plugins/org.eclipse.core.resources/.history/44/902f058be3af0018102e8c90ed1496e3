@@ -1,0 +1,75 @@
+/*
+	소스 -- 파일 "C:/iotestdata/myprofile.txt"
+		  FileReader	  
+	필터스트림(보조스트림, 오리발) BufferedReader
+
+		  
+	목적지 -- 파일 "C:/iotestdata/myprofile복사.txt"
+		    FileWriter
+	필터스트림(보조스트림, 오리발) BufferedWriter / PrintWriter
+*/
+
+package io.day3;
+
+import java.io.*;
+
+public class BufferedReaderWriterTest {
+
+	public static void main(String[] args) {
+		try {
+			//소스파일이름
+			String srcFilename = "C:/iotestdata/myprofile.txt";
+			
+			//2byte기반의 입력노드스트림 생성(빨대꽂기)
+			FileReader fReader = new FileReader(srcFilename);
+			
+			//필터스트림(보조스트림, 오리발)을 노드스트림에 장착하기
+			BufferedReader bufReader = new BufferedReader(fReader, 1024);//기본 버퍼크기는 512 byte 이다.
+			
+		//-------------------------------------------------------------------------------------------//
+			
+			//목적지 파일 이름
+			String targetFilename ="C:/iotestdata/myprofile복사.txt";//이거 생성 
+			
+			//2byte기반의 출력노드스트림 생성(빨대꽂기)
+			FileWriter fWriter = new FileWriter(targetFilename);
+			
+			//출력 필터스트림(보조스트림, 오리발)을 노드스트림에 장착하기
+			BufferedWriter bufWriter = new BufferedWriter(fWriter, 1024);
+			
+			String strLine = "";
+			
+			//한줄씩읽어와 return타입이 String 마지막이 null이니까
+			while( (strLine = bufReader.readLine()) != null) {
+				//bufReader.readLine() 메소드는 1줄 단위로 읽어와서
+				//읽어온 내용을 String 타입으로 반환해준다.
+				//1줄을 읽어오되 엔터 전까지 읽어온다.
+				
+				bufWriter.write(strLine);//write()는 줄 바꿈이 없어
+				bufWriter.newLine();//줄바꿈한다. newLine()줄바꿈이다.
+			//	bufWriter.write("\r\n");// 이거도 줄바꿈 엔터이다.
+				bufWriter.flush();
+				
+			}//end of while---------------------------------
+			
+			System.out.println("\n>>> 파일복사완료 <<<");
+			
+			bufReader.close();
+			bufWriter.close();
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
+			
+		}
+				
+		
+		
+		
+		
+
+	}//end of main()---------------------------------------
+
+}

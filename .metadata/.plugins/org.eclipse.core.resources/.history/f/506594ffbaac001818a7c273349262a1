@@ -1,0 +1,77 @@
+package my.day19.sub6;
+//========================================= 동기화한  ===========================================
+
+
+public class SyncBankbookMain {
+		
+		public static void main(String[] args) {
+		//main()도 스레드!! 
+
+			SyncBankbook bankbook = new SyncBankbook("123-4-5678", 10000);
+			//공유 통장 데이터 1개 생성. 초기 금액은 10000원
+
+	   // ===================== 입금 스레드 구현 객체 10개 생성(가족열명을 만들었다고 생각해라 ) ================================= //
+			                  //(공유 통장 데이터 1개를 가족 10명이 동시에 입금한다라고 생각하자)
+			
+			UpmoneyRunnable[] uprunArr = new UpmoneyRunnable[10];
+			Thread[] thrupArr = new Thread[10];
+			
+			for(int i=0; i<uprunArr.length; i++) {
+				UpmoneyRunnable uprunnable = new UpmoneyRunnable(bankbook, 1000);
+				//bnakbook(공통으로 사용), 1000원씩 입금하는걸 만든거야 10개
+				
+				uprunArr[i] = uprunnable;
+				thrupArr[i] = new Thread(uprunArr[i]/*Runnable 을 구현한 객체*/);
+				//매번 스레드를 만들어서 넣어주고 넣어주고...
+				
+			}
+			
+			
+		// =================================== 출금 스레드 구현 객체 10개 생성 =========================================== //
+			                         //(공유 통장 데이터 1개를 가족 10명이 동시에 출금한다라고 생각하자)
+			
+			DownmoneyRunnable[] downrunArr = new DownmoneyRunnable[10];
+			Thread[] thrdownArr = new Thread[10];
+			
+			for(int i=0; i<downrunArr.length; i++) {
+				DownmoneyRunnable downrunnable = new DownmoneyRunnable(bankbook, 1000);
+				//bnakbook(공통으로 사용), 1000원씩 출금하는걸 만든거야 10개
+				
+				downrunArr[i] = downrunnable;
+				thrdownArr[i] = new Thread(downrunArr[i]/*Runnable 을 구현한 객체*/);
+				//매번 스레드를 만들어서 넣어주고 넣어주고...
+				
+			}
+			
+
+			//main()도 스레드이다. 입금10개 출금10개가 나와야되는데 안나올때도 있어
+			//main() 스레드가 끝났기 때문이야 여기는 21개의 스레드가 작동을 한다.(thrupArr10개,thrdownArr10개,main)
+			for(int i=0; i<thrupArr.length; i++) {
+				thrupArr[i].start();// 10개의 입금 스레드들을 작동시킨다.
+				thrdownArr[i].start();
+				
+				
+			// ********************** 중요 *********************** //
+			// 아래의 join()메소드가 있을 때에는 thrupArr.length(10번)을 수행을 하지만
+			// join() 메소드가 없을때에는 main()스레드가 먼저 끝날수도 있으므로 
+			//thrupArr.length(10번)만큼 수행을 보장해주지 못한다.
+				
+			/*	
+				try {
+					thrdownArr[i].join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}//이 스레드를 수행할 동안에 다른 스레드는(main,thrupArr) block*/
+				
+				
+				
+			}
+			
+			
+			System.out.println(">>>> main 스레드 종료 <<<<");
+			
+
+	}//end of main()-------------------------------
+
+}

@@ -1,0 +1,64 @@
+package net.day1;
+
+import java.net.*;
+import java.util.Date;
+import java.io.*;
+
+public class EchoNetServer2 {
+
+	public static void main(String[] args) {
+	
+		//1.서버소켓 생성
+		final int port = 10000;
+		ServerSocket srvSock = null;
+		Socket sock = null;
+		
+		
+		try {
+			srvSock = new ServerSocket(port);
+			// 포트번호 6000 을 사용하는 서버소켓 객체를 생성한다.
+			
+			System.out.println("--- EchoNetServer Ready....");
+			
+		//2.통신하기 위한 Socket객체 생성하기
+			sock = srvSock.accept();
+			
+		//3.Socket sock 을 사용하여	클라이언트에게 데이터를 보내는(출력) 연결통로인 출력스트림 생성하기
+		//	Socket sock 을 사용하여	클라이언트에게 데이터를 받는(입력) 연결통로인 입력스트림 생성하기
+			OutputStream ostrm = sock.getOutputStream();
+			InputStream istrm = sock.getInputStream();
+			
+			DataOutputStream dostrm = new DataOutputStream(ostrm);
+			DataInputStream distrm = new DataInputStream(istrm);
+			
+			// === 클라이언트 쪽에서 보내온 메시지를 받아서 적절하게 응답해주기 === //
+			String clientMsg = ""; //null아님
+			
+			while((clientMsg = distrm.readLine()) != null) {
+			// 키보드로 Ctrl+C 가 null 이므로 이때 while 문을 탈출함.
+				
+				if(clientMsg.startsWith("time")) {
+					Date now = new Date();
+					String today = String.format("%tT ",now);
+					
+					printWriter.println(today);//클라이언트로 보내기
+				}
+				
+			}//end of while
+			
+			
+			if(istrm != null)istrm.close();
+			if(ostrm != null)ostrm.close();
+			if(sock != null)sock.close();
+			if(srvSock != null)srvSock.close();
+			
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		} 
+		
+		
+
+	}//end of main----------------------------------------
+
+}

@@ -1,0 +1,29 @@
+public class Member2 
+{
+	String userid;		// 아이디  (문자열)
+	String pwd;			// 암호   (문자열)
+	String name;		// 성명   (문자열)
+	int age;			// 나이   (정수)
+	String address;		// 주소   (문자열)
+
+	public Member2() { } // 기본생성자 생략(생성자의 기술이 아무것도 없을때 파라미터가 없을때 )
+
+	public Member2(String userid, String pwd, String name, int age, String address) {
+		this.userid = userid;
+		this.pwd = pwd;
+		this.name = name;
+		this.age = age;
+		this.address = address;
+	}
+
+
+	public void showInfo() {
+		System.out.println("====================");
+		System.out.println("1.아이디 : " + userid);
+		System.out.println("2.암 호 : " + pwd);
+		System.out.println("3.성 명 : " + name);
+		System.out.println("4.나 이 : " + age);
+		System.out.println("5.주 소 : " + address);
+		System.out.println("====================");
+	}
+}

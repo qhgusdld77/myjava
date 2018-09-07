@@ -1,0 +1,54 @@
+package my.day19.sub4;
+
+public class DownmoneyRunnable implements Runnable {
+
+	private NoSyncBankbook bankbook;
+	private long downmoney;
+	
+	public DownmoneyRunnable() {}
+	
+	
+	public DownmoneyRunnable(NoSyncBankbook bankbook, long downmoney) {
+		super();
+		this.bankbook = bankbook;
+		this.downmoney = downmoney;
+	}
+
+
+
+
+	public NoSyncBankbook getBankbook() {
+		return bankbook;
+	}
+
+
+
+
+	public void setBankbook(NoSyncBankbook bankbook) {
+		this.bankbook = bankbook;
+	}
+
+
+
+
+	public long getDownmoney() {
+		return downmoney;
+	}
+
+
+
+
+	public void setDownmoney(long downmoney) {
+		this.downmoney = downmoney;
+	}
+
+
+
+
+	@Override
+	public void run() {
+		
+		
+	}//end of run()------------------------------------------
+
+}

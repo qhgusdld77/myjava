@@ -1,0 +1,36 @@
+/*
+	소스 - 입력노드 스트림 키보드(System.in) => 1byte기반 
+			           | 	
+	브릿지 스트림 InputStreamReader => 1byte를 2byte로 변경
+	                   |
+	목적지 - 출력 노드 스트림 FileWriter => 2byte기반
+*/
+package io.day3;
+
+import java.io.*;
+public class OutputStreamWriterTest {
+
+	public static void main(String[] args) {
+		
+		try {
+			String fileName = "c:/iotestdata/오늘의날씨.txt";
+			FileReader fr = new FileReader(fileName);
+			
+			OutputStreamWriter osWriter = new OutputStreamWriter(System.out);
+			
+			int input = 0;
+			
+			while((input = fr.read()) != -1) {
+				osWriter.write(input);
+				osWriter.flush();
+			}
+			
+			fr.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//end of main-------------------
+
+}

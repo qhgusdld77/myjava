@@ -1,0 +1,38 @@
+package boTest;
+
+import java.io.*;
+
+public class BufferedInputStreamTest {
+
+	public static void main(String[] args) {
+		
+		//키보드입력,모니터출력,파일덮어쓰기
+		try {
+			BufferedInputStream bi = new BufferedInputStream(System.in, 1024);
+			
+			BufferedOutputStream bo = new BufferedOutputStream(System.out, 1024);
+	
+			String file = "C:\\iotestdata\\파일덮어쓰기.txt";
+			FileOutputStream fo = new FileOutputStream(file, false);
+			
+			BufferedOutputStream bo2 = new BufferedOutputStream(fo, 1024);
+			
+			int input = 0;
+			
+			while((input = bi.read()) != -1) {
+				bo.write(input);
+				bo.flush();
+				
+				bo2.write(input);
+				bo2.flush();
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("파일의 경로가 없습니다.");
+		}catch(IOException e) {
+		}
+		
+
+	}
+
+}

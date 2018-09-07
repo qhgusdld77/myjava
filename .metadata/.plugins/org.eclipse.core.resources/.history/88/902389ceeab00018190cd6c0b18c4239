@@ -1,0 +1,82 @@
+/*
+	==== TCP 통신방식을 이용한 예제 ====
+	- 서버단          : ServerSocket 과 Socket 이 필요함.
+	- 클라이언트단 : Socket 이 필요함.
+
+*/
+
+
+package net.day1;
+
+import java.io.*;
+import java.net.*;		// java.net.*; 은 항상 java.io.*; 와 같이 동반해야한다.
+import java.util.Date;
+
+public class MyNetServer2 {
+
+	public static void main(String[] args) throws IOException{
+		 
+
+		ServerSocket serverSock = new ServerSocket(10000); 
+		System.out.println("---- 클라이언트 연결을 기다림....");
+		
+		
+		while(true) {
+			
+			Socket sock = serverSock.accept();
+			System.out.println(">>> 클라이언트가 접속해옴 <<<");
+			
+			InputStream instrm = sock.getInputStream();
+			
+			DataInputStream dinstrm = new DataInputStream(instrm);
+			
+			String clientMsg = dinstrm.readUTF();
+			
+			System.out.println(">>client로 부터 온 메시지 : " +clientMsg);
+						
+			
+			OutputStream outstrm = sock.getOutputStream();
+			
+			DataOutputStream doutstrm = new DataOutputStream(outstrm);
+			
+			
+			
+			String clientMs = ""; //null아님
+			
+			while((clientMs = dinstrm.readUTF()) != null) {
+				
+				if(clientMs.startsWith("time")) {
+					Date now = new Date();
+					String today = String.format("%tT", now);
+					
+					doutstrm.writeUTF(today);//클라이언트로 보내기
+					doutstrm.flush();
+				}
+			
+				
+			}//end of while
+
+			
+			if(doutstrm != null)doutstrm.close();
+			if(outstrm != null)outstrm.close();
+			if(dinstrm != null)dinstrm.close();
+			if(instrm != null)instrm.close();
+			if(sock != null)sock.close();
+		
+
+			
+			
+			
+			
+			
+			
+		}// end of while
+		
+		
+		
+		
+		
+		
+		
+	}// end of main------------------------------------------------
+}

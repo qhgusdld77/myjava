@@ -1,0 +1,100 @@
+package io.day4;
+
+import java.util.*;
+import java.io.*;
+
+public class MemberMain {
+
+	public static void startMenu() {
+		
+		System.out.println("\n======== 초기 Menu ========");
+		System.out.println("1. 회원가입");
+		System.out.println("2. 로그인");
+		System.out.println("3. 모든회원출력");
+		System.out.println("4. 특정ID검색하기");
+		System.out.println("5. 종료");
+		System.out.println("==========================");
+		
+		
+	}//end of startMenu()------------------------
+
+	//-------------------------------------------- 회원가입 --------------------------------------------------------//
+	
+	public static Member registermember(Scanner sc) {
+		
+		System.out.print(">> 아이디 :");
+		String userid = sc.nextLine();
+		
+		System.out.print(">> 암호 :");
+		String userpasswd = sc.nextLine();
+		
+		System.out.print(">> 이름 :");
+		String username = sc.nextLine();
+		
+		System.out.print(">> 나이 :");
+		String userage = sc.nextLine();
+		
+		Member member = new Member(userid, userpasswd, username, userage);
+		
+		return member;
+
+	}//end of registermember()--------------------------------------------------------------------------------------
+	
+	//------------------------------------------- 로그인 -------------------------------------------------------------//
+	public static Member login(String sc) {
+		
+		return null;
+		
+	}
+	
+//-------------------------------------- main ----------------------------------------------------------------------//	
+	public static void main(String[] args) {
+		
+		List<Member> memList = new ArrayList<Member>();
+		String savefilename = "c:/iotestdata/serializable/member.dat";
+		SerializableTest serial = new SerializableTest();
+		memList = (List<Member>)serial.getObjectFromFile(savefilename);
+		
+		Scanner sc = new Scanner(System.in);
+		String menuno = "";
+		do {
+			MemberMain.startMenu();
+			System.out.print(">> 메뉴번호를 입력하세요 :");
+			menuno = sc.nextLine();
+			
+			switch (menuno) {
+			case "1"://회원가입
+				memList.add(MemberMain.registermember(sc));
+				serial.objectToFileSave(memList, "c:/iotestdata/serializable/member.dat");
+				break;
+			case "2"://로그인
+				
+				break;
+			case "3"://모든회원출력
+				for(Member mem : memList) {
+					System.out.println(mem);
+				}
+				break;
+			case "4"://특정ID검색하기
+
+				break;
+
+			default:
+				break;
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+		} while (!"5".equals(menuno));
+		
+		
+		
+
+	}
+
+}

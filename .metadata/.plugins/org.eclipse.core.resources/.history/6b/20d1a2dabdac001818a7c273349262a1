@@ -1,0 +1,66 @@
+package my.day19.sub5;
+
+public class SyncBankbook { // 통장 클래스(데이터)
+	
+	private String account;		//통장 계좌번호
+	private long balance; 		//잔고액
+	
+	public SyncBankbook() {}
+	
+	public SyncBankbook(String account, long balbance) {
+		this.account = account;
+		this.balance = balbance;
+	}
+	
+	
+
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public long getBalance() {
+		return balance;
+	}
+	public void setBalance(long balbance) {
+		this.balance = balbance;
+	}
+	
+	
+	
+	
+	
+	
+	// ============================= 동기화 처리를 한 입금 메소드 ================================ //
+	public synchronized void deposit (long money) {
+		
+		System.out.println("*** 입금업무시작 ***");
+		//돈을 넣어주면 기존잔액에 입금액만큼더해 
+		balance += money;
+		System.out.println("계좌번호 : "+account+ " 입금액 => "+money+", 입금후 잔액 =>"+balance);
+		System.out.println("*** 입금업무완료 ***\n");
+	}
+	
+	
+	
+	
+	
+	// ============================= 동기화 처리를 한 출금 메소드 ============================= //
+	public synchronized void withdraw(long money) {
+		
+		//기존잔액이 출금하려는 잔액보다 작으면 안돼
+		if(balance - money < 0) {
+			System.out.println("*** 출금업무시작 ***");
+			System.out.println("계좌번호 : " +account+ " 잔액부족! 현재금액 => "+balance+", 출금요청금액 =>"+money);
+			System.out.println("*** 출금업무완료 ***\n");
+			return;//메소드가 종료되니까 여기서 끝나 else 안써도되지 
+			
+		}
+		System.out.println("*** 출금업무시작 ***");
+		balance -= money;//출금
+		System.out.println("계좌번호 : "+account+ " 출금액 => "+money+", 출금후 잔액 =>"+balance);
+		System.out.println("*** 출금업무완료 ***\n");
+	}
+
+}

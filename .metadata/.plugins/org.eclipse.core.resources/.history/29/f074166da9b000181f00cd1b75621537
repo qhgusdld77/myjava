@@ -1,0 +1,22 @@
+/*
+	==== TCP 통신방식을 이용한 예제 ====
+	- 서버단          : ServerSocket 과 Socket 이 필요함.
+	- 클라이언트단 : Socket 이 필요함.
+
+*/
+
+
+package net.day1;
+
+import java.io.*;
+import java.net.*;		// java.net.*; 은 항상 java.io.*; 와 같이 동반해야한다.
+
+public class MyNetServer {
+
+	public static void main(String[] args) {
+		
+		
+		
+		
+	}// end of main------------------------------------------------
+}

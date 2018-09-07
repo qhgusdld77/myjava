@@ -1,0 +1,48 @@
+package 연습문제;
+
+import java.util.Scanner;
+
+public class Ex4_9 {
+
+	public static void main(String[] args) {
+/*		String str = "12345";
+		int sum = 0;
+		
+		for(int i=0; i<str.length(); i++) {
+				sum += str.charAt(i)-'0';			
+		}
+
+		System.out.println("sum="+sum);*/
+		
+		
+		Scanner sc = new Scanner(System.in);
+		
+		for(;;) {
+			int num = 0;
+			try {
+				System.out.print("숫자를 입력하세요 : ");
+				num = Integer.parseInt(sc.nextLine());
+				
+			} catch (Exception e) {
+				System.out.println("숫자가 너무 커요");
+				break;
+			}
+			int sum = 0;
+			
+			do {
+				if(num<10) {
+					sum+=num;
+					break;
+				}
+				else {
+					sum+= num%10;
+					num = num/10;
+				}
+				
+			} while (true);
+				
+			System.out.println("sum="+sum);
+		}
+	}
+}
+

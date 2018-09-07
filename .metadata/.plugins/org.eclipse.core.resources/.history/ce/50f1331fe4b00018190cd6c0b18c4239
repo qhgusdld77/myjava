@@ -1,0 +1,89 @@
+/*
+	==== TCP 통신방식을 이용한 예제 ====
+	- 서버단          : ServerSocket 과 Socket 이 필요함.
+	- 클라이언트단 : Socket 이 필요함.
+
+*/
+
+
+package net.day1;
+
+import java.io.*;
+import java.net.*;		// java.net.*; 은 항상 java.io.*; 와 같이 동반해야한다.
+import java.util.Date;
+
+public class MyNetServer2 {
+
+	public static void main(String[] args) throws IOException{
+		 
+
+		ServerSocket serverSock = new ServerSocket(1000); 
+		
+		
+		while(true) {
+			
+			Socket sock = serverSock.accept();
+
+			OutputStream outstrm = sock.getOutputStream();
+			
+			DataOutputStream doutstrm = new DataOutputStream(outstrm);
+			
+			doutstrm.flush();
+			
+			
+			
+			
+			
+			// ==== 클라이언트에서 보내온 메시지를 일거서 출력하도록 하겠다.==== //
+			//클라이언트쪽에 스트림을 통해 보내온 메시지를 읽어서 출력하도록 한다.
+			InputStream instrm = sock.getInputStream();
+			//sock.getInputStream() 메소드를 사용하여 1byte기반 기본 입력스트림(InputStream)객체를 얻어온다.
+			
+			DataInputStream dinstrm = new DataInputStream(instrm);
+			//기본 입력스트림(InputStream)에 필터스트림(보조스트림, 오리발)을 장착한다.
+			
+			String clientMsg = dinstrm.readUTF();
+			
+			while((clientMsg = dinstrm.read()) != null) {
+				// 키보드로 Ctrl+C 가 null 이므로 이때 while 문을 탈출함.
+					
+					if(clientMsg.startsWith("time")) {
+						Date now = new Date();
+						String today = String.format("%tT ",now);
+						
+						printWriter.println(today);//클라이언트로 보내기
+					}
+					
+				}//end of while
+			
+			//dinstrm.readUTF() 은 DataInputStream을 통해 받은 byte를 UTF-8 형식으로 읽어들여서 
+			//문자열(String) 타입으로 리턴시켜주는 메소드이다.
+			
+			System.out.println(">> "+clientIP+"로 부터 온 메시지 : " +clientMsg);
+			
+			if(doutstrm != null)doutstrm.close();
+			if(outstrm != null)outstrm.close();
+			if(dinstrm != null)dinstrm.close();
+			if(instrm != null)instrm.close();
+			if(sock != null)sock.close();
+			
+			//if(serverSock != null) serverSock.close(); 을 하면 안된다.
+			//왜냐하면 ServerSocket serverSock 이 존재해야만
+			//새로운 클라이언트의 연결을 바아줄 수 있기 때문이다.
+
+			
+			
+			
+			
+			
+			
+		}// end of while
+		
+		
+		
+		
+		
+		
+		
+	}// end of main------------------------------------------------
+}

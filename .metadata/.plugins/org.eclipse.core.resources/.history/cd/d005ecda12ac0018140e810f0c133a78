@@ -1,0 +1,12 @@
+package my.day19.sub3;
+
+public class YieldMain {
+
+	public static void main(String[] args) {
+
+		// **** Runnable 객체 생성하기 **** //
+		Yield[] yieldArr = new Yield[5];
+
+	}//end of main()------------------------------
+
+}

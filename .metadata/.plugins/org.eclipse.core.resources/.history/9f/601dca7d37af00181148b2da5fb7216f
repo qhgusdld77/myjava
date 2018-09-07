@@ -1,0 +1,36 @@
+/*
+	>>>>> File 클래스 <<<<<
+	자바에서 File 클래스의 객체라함은 파일 및 폴더(디렉토리)를 다 포함한다.
+*/
+
+package io.day2;
+
+import java.util.Scanner;
+import java.io.*;
+
+public class FileTest {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("탐색기에 존재하는 파일명을 입력하세요 : ");
+		String fileName = sc.nextLine();
+		//c:/iotestdata/Tulips.jpg
+		
+		File file1 = new File(fileName);
+		
+		System.out.println("파일명 : "+file1.getName());
+		//file1.getName(); 은 파일명을 알려주는 것이다.
+		
+		long fileSize = file1.length();
+		System.out.println("파일크기 : "+fileSize);
+		
+		System.out.println("파일의 절대경로 : "+file1.getAbsolutePath());
+		
+		
+		sc.close();
+
+	}//end of main-------------------------------------
+
+}

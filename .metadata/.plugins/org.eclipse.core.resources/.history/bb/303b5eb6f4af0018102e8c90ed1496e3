@@ -1,0 +1,26 @@
+package io.day4;
+
+import java.util.*;
+
+public class MainTest {
+
+	public static void main(String[] args) {
+		
+		Student stud1 = new Student("한석규", 21, "서울시 강동구");
+		Student stud2 = new Student("두석규", 22, "서울시 강서구");
+		Student stud3 = new Student("세석규", 23, "서울시 강남구");
+		Student stud4 = new Student("네석규", 24, "서울시 강북구");
+		
+		List<Student> studList = new ArrayList<Student>();
+		
+		studList.add(stud1);
+		studList.add(stud2);
+		studList.add(stud3);
+		studList.add(stud4);
+		
+		SerializableTest serial = new SerializableTest();
+		serial.objectToFileSave(studList, "c:/iotestdata/serializable/students.dat");
+
+	}
+
+}

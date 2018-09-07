@@ -1,0 +1,25 @@
+package io.day1;
+
+import java.io.IOException;
+
+public class InputStreamTest2 {
+
+	public static void main(String[] args) throws IOException {
+
+		int input = 0;
+		
+		while((input = System.in.read()) != -1) {
+			//키보드로 Ctrl+C(강제종료)를 누리지 않으면 계속 실행해라.
+			//즉, 키보드로 (강제종료)를 누르면 while문을 빠져나간다.
+			
+			System.out.println("\r\n === 키보드로 부터 데이터 입력받기 ===");
+			System.out.println("화면에 출력 [println(input)]"+input);
+		}//end of while----------------------------
+		input = System.in.read();
+		
+		System.out.println("input1 => "+input);
+	
+
+	}//end of main--------------
+
+}
